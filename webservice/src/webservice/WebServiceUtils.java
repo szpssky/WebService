@@ -79,6 +79,10 @@ public class WebServiceUtils {
 				requestSoapObject.addProperty(key, args.get(key));
 			}
 		}
+		/**
+		 * if the call methodName include some other type like byte[] and soon must 
+		 * register for your self ,it not good 
+		 */
 		if (methodName.equals("uploadMemoDBFile")) {
 			Marshal byteMarshal = new MarshalBase64();
 			byteMarshal.register(envelope);
@@ -100,9 +104,6 @@ public class WebServiceUtils {
 				System.out.println(ex);
 			} else if (retObj instanceof SoapPrimitive) {
 				SoapPrimitive soapPrimitive = (SoapPrimitive) retObj;
-				System.out.println("===========" + soapPrimitive
-						+ "&&&&&&&&&&&&&&&&&&&");
-
 				object = unmarshalSoapPimitiveResponse(retObj, resultType);
 				return object;
 			} else if (retObj instanceof Vector) {
@@ -157,6 +158,7 @@ public class WebServiceUtils {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+		
 		return object;
 	}
 }
